@@ -1,6 +1,6 @@
-from domain.Algoritimo import Algoritimo
+from domain.Strategy import Strategy
 
-class Spock(Algoritimo):
+class Spock(Strategy):
     '''Classe Spock que herda de Algoritimo e implementa o método abstrato _executar'''
 
     def _executar(self, tipo):

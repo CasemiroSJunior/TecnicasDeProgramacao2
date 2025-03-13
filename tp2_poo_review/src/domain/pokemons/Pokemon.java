@@ -1,4 +1,4 @@
-package domain;
+package domain.pokemons;
 
 public abstract class Pokemon {
     private int hp;

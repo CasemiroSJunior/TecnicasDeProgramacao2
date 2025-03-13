@@ -1,6 +1,6 @@
-from domain.Algoritimo import Algoritimo
+from domain.Strategy import Strategy
 
-class Lagarto(Algoritimo):
+class Lagarto(Strategy):
     '''Classe Lagarto que herda de Algoritimo e implementa o método abstrato _executar'''
     
     def _executar(self, tipo):

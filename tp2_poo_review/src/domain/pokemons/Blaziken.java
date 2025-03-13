@@ -1,4 +1,4 @@
-package domain;
+package domain.pokemons;
 
 public class Blaziken extends Pokemon implements FireType {
     public Blaziken (int hp, int cp){

@@ -1,6 +1,6 @@
-from domain.Algoritimo import Algoritimo
+from domain.Strategy import Strategy
 
-class Papel(Algoritimo): 
+class Papel(Strategy): 
     '''Classe papel que herda de Algoritimo e implementa o método abstrato _executar''' 
         
     def _executar(self, tipo):
