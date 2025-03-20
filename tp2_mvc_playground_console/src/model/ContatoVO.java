@@ -2,13 +2,13 @@ package model;
 
 import java.util.Objects;
 
-public class Contato {
+public class ContatoVO {
     private Integer id;
     private String name;
     private String number;
     private String email;
 
-    public Contato(Integer id, String name, String number, String email) {
+    public ContatoVO(Integer id, String name, String number, String email) {
         this.id = id;
         this.name = name;
         this.number = number;
@@ -51,8 +51,8 @@ public class Contato {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Contato contato = (Contato) o;
-        return Objects.equals(id, contato.id);
+        ContatoVO contatoVO = (ContatoVO) o;
+        return Objects.equals(id, contatoVO.id);
     }
 
     @Override

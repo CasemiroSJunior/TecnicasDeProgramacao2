@@ -1,16 +1,18 @@
-package model;
+package model.repository;
+
+import model.ContatoVO;
 
 import java.util.List;
 
 public class ContatoMySqlRepositoryImpl implements iContatoRepository{
 
     @Override
-    public void salvar(Contato contato) {
+    public void salvar(ContatoVO contatoVO) {
 
     }
 
     @Override
-    public void atualizar(Contato contato) {
+    public void atualizar(ContatoVO contatoVO) {
 
     }
 
@@ -20,12 +22,12 @@ public class ContatoMySqlRepositoryImpl implements iContatoRepository{
     }
 
     @Override
-    public Contato buscarPorEmail(String email) {
+    public ContatoVO buscarPorEmail(String email) {
         return null;
     }
 
     @Override
-    public List<Contato> buscarTodos() {
+    public List<ContatoVO> buscarTodos() {
         return List.of();
     }
 }
