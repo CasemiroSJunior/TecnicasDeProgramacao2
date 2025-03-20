@@ -1,4 +1,6 @@
+import model.dao.ContatoDAO;
 import model.factory.ConnectionFactory;
+import model.factory.TipoBanco;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,6 +21,14 @@ public class App {
         if (rstMySQL.next()){
             System.out.println(rstMySQL.getString("versao"));
         }*/
+
+        String databaseType = args[0];
+
+        TipoBanco tipo = TipoBanco.getTipo(databaseType);
+        ConnectionFactory.getConnection(tipo);
+
+        ContatoDAO dao = new ContatoDAO(ConnectionFactory.getConnection(tipo));
+
 
     }
 }

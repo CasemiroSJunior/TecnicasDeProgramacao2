@@ -6,25 +6,28 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-    private static String URL = "";
+/*    private static String URL = "";
     private static final String USER = "root";
-    private static String PASSWORD = "";
+    private static String PASSWORD = "";*/
 
-    public static Connection getConnection(String database) throws SQLException {
-        switch(database){
-            case "mysql":
-                URL = "jdbc:mysql://localhost:3307/fatec";
-                PASSWORD = "root";
-                return DriverManager.getConnection(URL, USER, PASSWORD);
+    public static Connection getConnection(TipoBanco tipoBanco) throws SQLException {
 
+        return DriverManager.getConnection(tipoBanco.getUrl(), tipoBanco.getUser(), tipoBanco.getPassword());
 
-            case "mariadb":
-                URL = "jdbc:mariadb://localhost:3306/fatec";
-                PASSWORD = "";
-                return DriverManager.getConnection(URL, USER, PASSWORD);
-            default:
-                throw new Error("Selecione um sgbd");
-        }
+//        switch(database){
+//            case "mysql":
+//                URL = "jdbc:mysql://localhost:3307/fatec";
+//                PASSWORD = "root";
+//                return DriverManager.getConnection(URL, USER, PASSWORD);
+//
+//
+//            case "mariadb":
+//                URL = "jdbc:mariadb://localhost:3306/fatec";
+//                PASSWORD = "";
+//                return DriverManager.getConnection(URL, USER, PASSWORD);
+//            default:
+//                throw new Error("Selecione um sgbd");
+//        }
 
     }
 
