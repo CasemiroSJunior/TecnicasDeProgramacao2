@@ -1,12 +1,12 @@
 package model;
 
-public class ContatoVO {
+public class ContatoDTO {
     private Integer id;
     private String nome;
     private String email;
     private String telefone;
 
-    public ContatoVO(Integer id, String nome, String email, String telefone) {
+    public ContatoDTO(Integer id, String nome, String email, String telefone) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -51,7 +51,7 @@ public class ContatoVO {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ContatoVO other = (ContatoVO) obj;
+        ContatoDTO other = (ContatoDTO) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -59,6 +59,4 @@ public class ContatoVO {
             return false;
         return true;
     }
-
-
 }

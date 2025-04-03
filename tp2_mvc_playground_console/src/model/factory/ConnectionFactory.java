@@ -10,9 +10,13 @@ public class ConnectionFactory {
     private static final String USER = "root";
     private static String PASSWORD = "";*/
 
-    public static Connection getConnection(TipoBanco tipoBanco) throws SQLException {
+    public static Connection getConnection(TipoBanco tipoBanco) {
 
-        return DriverManager.getConnection(tipoBanco.getUrl(), tipoBanco.getUser(), tipoBanco.getPassword());
+        try {
+            return DriverManager.getConnection(tipoBanco.getUrl(), tipoBanco.getUser(), tipoBanco.getPassword());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 //        switch(database){
 //            case "mysql":
