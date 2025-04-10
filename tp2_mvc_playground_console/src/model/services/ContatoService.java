@@ -1,31 +1,74 @@
 package model.services;
+
+import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
+
 import model.ContatoDTO;
 import model.ContatoVO;
-import model.repository.iContatoRepository;
+import model.repositories.iContatoRepository;
 
 public class ContatoService {
 
     private final iContatoRepository repository;
+    private final Logger log;
 
     public ContatoService(iContatoRepository repository) {
         this.repository = repository;
+        this.log = Logger.getLogger(ContatoService.class.getName());
     }
 
     public void salvar(ContatoDTO dto) {
-        try{//TODO: Validar o dto
+        try {
+            // TODO: Validar o dto
             validar(dto);
-            //TODO: Converter dto para VO
-            var contato = new ContatoVO(
-                    null,
+            // TODO: Converter dto para VO
+            var contato = new ContatoVO(null,
                     dto.getNome(),
                     dto.getEmail(),
-                    dto.getTelefone()
-            );
+                    dto.getTelefone());
+
+            // TODO: Salvar o contato através do repository
             repository.salvar(contato);
-        }catch (Exception e){
-            System.out.println("Falha ao salvar contato. Error:" + e);
+            log.info("Contato salvo com sucesso.");
+        } catch (Exception e) {
+            System.out.println("Falha ao salvar contato.");
         }
+
+    }
+
+    public List<ContatoDTO> buscarTodos() {
+        return repository.buscarTodos()
+                .stream()
+                .map(contato -> new ContatoDTO(
+                        contato.getId(),
+                        contato.getNome(),
+                        contato.getEmail(),
+                        contato.getTelefone()))
+                .toList();
+    }
+
+    public ContatoDTO buscarPorEmail(String email) {
+        try {
+            if (Objects.isNull(email)) {
+                throw new IllegalArgumentException("Email não pode ser nulo");
+            }
+            var contato = repository.buscarPorEmail(email);
+
+            if (Objects.isNull(contato)) {
+                throw new IllegalArgumentException("Contato não encontrado");
+            }
+
+            return new ContatoDTO(
+                    contato.getId(),
+                    contato.getNome(),
+                    contato.getEmail(),
+                    contato.getTelefone());
+        } catch (Exception e) {
+            System.out.println("Falha ao buscar contato.");
+            return null;
+        }
+
     }
 
     private void validar(ContatoDTO dto) {
@@ -45,4 +88,8 @@ public class ContatoService {
             throw new IllegalArgumentException("Telefone não pode ser nulo");
         }
     }
+
+    //TODO: incluir o detete
+
+    //TODO: Incluir o atualizar
 }

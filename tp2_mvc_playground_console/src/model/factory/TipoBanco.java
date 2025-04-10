@@ -1,19 +1,33 @@
 package model.factory;
 
 public enum TipoBanco {
-    MYSQL(1, "jdbc:mysql://localhost:3307/fatec", "root", "root"),
-    MARIADB(2,"jdbc:mariadb://localhost:3306/fatec", "root", "");
+    MYSQL("-mysql", "jdbc:mysql://localhost:3307/fatec", "root", "root"),
+    MARIADB("-maria", "jdbc:mariadb://localhost:3306/fatec", "root", ""),
+    MONGODB("-mongo" , "mongodb://localhost:27017", "", "", "contatos", "contatos");
 
-    private final int id;
+    private final String param;
     private final String url;
     private final String user;
     private final String password;
+    private final String database;
+    private final String collection;
 
-    TipoBanco(int id, String url, String user, String password) {
-        this.id = id;
+    TipoBanco(String param, String url, String user, String password) {
+        this.param = param;
         this.url = url;
         this.user = user;
         this.password = password;
+        this.database = null;
+        this.collection = null;
+    }
+
+    TipoBanco(String param, String url, String user, String password, String database, String collection) {
+        this.param = param;
+        this.url = url;
+        this.user = user;
+        this.password = password;
+        this.database = database;
+        this.collection = collection;
     }
 
     public String getUrl() {
@@ -30,8 +44,21 @@ public enum TipoBanco {
         return password;
     }
 
+    public String getDatabase() {
+        return database;
+    }
+
+    public String getCollection() {
+        return collection;
+    }
+
+    public String getParam() {
+        return param;
+    }
+
     public static TipoBanco getTipo(String tipo) {
         if (tipo.equals("-mysql")) return MYSQL;
+        if (tipo.equals("-mongo")) return MONGODB;
         else return MARIADB;
     }
 

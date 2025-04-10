@@ -1,15 +1,20 @@
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import model.ContatoDTO;
-import model.ContatoVO;
 import model.dao.ContatoDAO;
 import model.factory.ConnectionFactory;
 import model.factory.TipoBanco;
-import model.repository.ContatoEmMemoriaRepositoryImpl;
-import model.repository.ContatoMySqlRepositoryImpl;
-import model.repository.iContatoRepository;
+import model.repositories.ContatoEmMemoriaRepositoryImpl;
+import model.repositories.ContatoMySqlRepositoryImpl;
+import model.repositories.iContatoRepository;
 import model.services.ContatoService;
+import view.ConsoleView;
 
 public class App {
-    static iContatoRepository repository;
+    /*static iContatoRepository repository;
 
     private static void config(String param){
         if (param.equals("-mysql")){
@@ -19,14 +24,14 @@ public class App {
         }else{
             repository = new ContatoEmMemoriaRepositoryImpl();
         }
-    }
+    }*/
 
     public static void main(String[] args) throws Exception {
-        try{
+        /*try{
             config(args[0]);
         }catch (Exception e){
             config("local");
-        }
+        }*/
         /*Connection connectionMysql = ConnectionFactory.getConnection("mysql");
         Connection connectionMariaDb = ConnectionFactory.getConnection("mariadb");
         System.out.println(connectionMysql);
@@ -75,7 +80,7 @@ public class App {
 
 
 
-        var c1 = new ContatoDTO(
+/*        var c1 = new ContatoDTO(
                 null,
                 "Casemiro",
                 "case.miro@gmail.com",
@@ -83,7 +88,27 @@ public class App {
         );
 
         var service = new ContatoService(repository);
-        service.salvar(c1);
+        service.salvar(c1);*/
+
+    // Conexão mongoDB
+
+    String url = "mongodb://localhost:27017";
+    MongoClient mongoClient = MongoClients.create(url);
+
+    MongoDatabase db = mongoClient.getDatabase("contatos");
+    MongoCollection<Document> contatosCollection = db.getCollection("contatos");
+    System.out.println(db);
+    System.out.println(contatosCollection);
+
+    var c1 = new Document("nome", "Casemiro")
+            .append("email", "case.miro@gmail.com")
+            .append("telefone", "199999999");
+
+    contatosCollection.insertOne(c1);
+    System.out.println(args[0]);
+
+        ConsoleView console = new ConsoleView(args[0]);
+        console.iniciar();
 
     }
 }
