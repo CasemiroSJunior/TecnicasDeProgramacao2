@@ -10,67 +10,53 @@ public class Main {
         System.out.println("5 - Alemão");
 
         Scanner scanner = new Scanner(System.in);
-        int idioma = scanner.nextInt();
+        int idiomaId = scanner.nextInt();
         scanner.nextLine();
 
-        if(idioma < 1 || idioma > 5) {
+        if (idiomaId < 1 || idiomaId > 5) {
             System.out.println("Idioma inválido.");
             return;
         }
 
-        if(idioma == 1) {
+        if (idiomaId == 1) {
             System.out.println("Olá, tudo bem com você?");
-        } else if(idioma == 2) {
+        } else if (idiomaId == 2) {
             System.out.println("Hello, how are you?");
-        } else if(idioma == 3) {
+        } else if (idiomaId == 3) {
             System.out.println("Hola, ¿cómo estás?");
-        } else if(idioma == 4) {
+        } else if (idiomaId == 4) {
             System.out.println("Bonjour, comment ça va?");
-        } else if(idioma == 5) {
+        } else if (idiomaId == 5) {
             System.out.println("Hallo, wie geht's dir?");
         }
-        /* Nesse sentido, se fosse adicionar um idioma novo
-          Seria necessário adicionar um novo bloco de código
-          para o idioma desejado, o que não é uma boa prática
-          de programação, pois o código ficaria muito grande
-          e difícil de manter.
-          Além disso, se o número de idiomas aumentar,
-          o código ficaria ainda mais complexo.
-         
-          Utilizando OCP, podemos criar uma interface
-            chamada Ola, que define um método ola() e
-            um método seApresentar(String nome).
-            Cada classe que implementa a interface Ola
-            representa um idioma diferente e implementa
-            os métodos de acordo com o idioma.
-            Dessa forma, podemos adicionar novos idiomas
-            sem precisar modificar o código existente.
-            Isso torna o código mais flexível e fácil de
-            manter, pois cada classe é responsável
-            por sua própria implementação.
+        /*
+         * Nesse sentido, se fosse necessário adicionar um idioma novo,
+         * seria preciso adicionar mais blocos de código (novos if-else),
+         * o que não é uma boa prática de programação, pois o código
+         * ficaria muito grande e difícil de manter.
+         * 
+         * Além disso, se o número de idiomas aumentasse,
+         * o código se tornaria ainda mais complexo.
+         * 
+         * Aplicando o princípio Open-Closed (OCP), podemos melhorar:
+         * - Criando uma interface chamada 'Ola' que define métodos como ola() e
+         * seApresentar(String nome).
+         * - Cada classe que implementa 'Ola' representa um idioma diferente e
+         * implementa seus próprios métodos.
+         * 
+         * Dessa forma, podemos adicionar novos idiomas
+         * sem modificar o código existente (fechado para modificação),
+         * apenas extendendo (aberto para extensão).
+         * 
+         * Isso torna o sistema muito mais flexível, organizado e fácil de manter.
+         * 
          */
 
-        // Exemplo de uso da interface Ola
-        
-        Ola idiomaSelecionado;
-        if (idioma == 1) {
-            idiomaSelecionado = new Portugues();
-        } else if (idioma == 2) {
-            idiomaSelecionado = new Ingles();
-        } else if (idioma == 3) {
-            idiomaSelecionado = new Espanhol();
-        } else if (idioma == 4) {
-            idiomaSelecionado = new Frances();
-        } else {
-            idiomaSelecionado = new Alemao();
-        }
-
-        System.out.println(idiomaSelecionado.ola());
-       System.out.println(idiomaSelecionado.seApresentar("João"));
-        System.out.println("Idioma selecionado: " + idiomaSelecionado.getIdioma());
+        Idiomas idioma = Idiomas.bucarIdiomas(idiomaId);
+        Ola ola = idioma.getIdioma();
+        System.out.println(ola.ola());
+        System.out.println(ola.seApresentar("Casemiro"));
 
     }
-
-
 
 }
